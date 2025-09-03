@@ -13,10 +13,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+$tags = ['обучение', 'программирование', 'php', 'oop'];
+
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/about', function () {
-    return view('about');
+Route::get('/about', function () use ($tags) {
+    return view('about', ['tags' => $tags]);
 })->name('about');
