@@ -1,7 +1,13 @@
 @extends('layouts.app')
 
+@section('header', 'Список статей')
+
 @section('content')
-    <h1>Список статей</h1>
+    @if(session('status'))
+      <div>
+        {{ session('status') }}
+      </div>
+    @endif
     <ul>
       @foreach ($articles as $article)
         <li>
@@ -9,4 +15,5 @@
         </li>
       @endforeach
     </ul>
+    <a href="{{ route('articles.create')}}">Создать статью</a>
 @endsection
