@@ -12,6 +12,7 @@
       @foreach ($articles as $article)
         <li>
           <a href="{{ route('articles.show', $article->id) }}">{{$article->name}}</a>
+          <a href="{{ route('articles.edit', $article->id)}}">Редактировать статью</a>
         </li>
       @endforeach
     </ul>
