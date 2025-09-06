@@ -11,8 +11,10 @@
     </head>
     <body>
         <div class="container mt-4">
+            
             <h1>@yield('header')</h1>
             <div>
+                @include('shared.flash')
                 @yield('content')
             </div>
         </div>

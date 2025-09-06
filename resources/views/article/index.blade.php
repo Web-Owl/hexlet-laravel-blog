@@ -3,11 +3,6 @@
 @section('header', 'Список статей')
 
 @section('content')
-    @if(session('status'))
-      <div>
-        {{ session('status') }}
-      </div>
-    @endif
     <ul>
       @foreach ($articles as $article)
         <li>
