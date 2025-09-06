@@ -11,8 +11,11 @@
     <ul>
       @foreach ($articles as $article)
         <li>
-          <a href="{{ route('articles.show', $article->id) }}">{{$article->name}}</a>
-          <a href="{{ route('articles.edit', $article->id)}}">Редактировать статью</a>
+          <span>
+            <a href="{{ route('articles.show', $article) }}">{{$article->name}}</a>
+            (<a href="{{ route('articles.edit', $article) }}">Редактировать</a>)
+            (<a href="{{ route('articles.destroy', $article) }}" data-confirm="Вы уверены?" data-method="delete" rel="nofollow">Удалить</a>)
+          </span>
         </li>
       @endforeach
     </ul>

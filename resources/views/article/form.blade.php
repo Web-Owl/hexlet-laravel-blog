@@ -8,7 +8,7 @@
   </div>
 @endif
 
-{{  html()->label('Имя', 'name')  }}
-{{  html()->input('text', 'name') }}
-{{  html()->label('Содержание', 'body') }}
-{{  html()->textarea('body') }}
+{{  html()->label('Имя', 'name')  }}<br>
+{{  html()->input('text', 'name') }}<br>
+{{  html()->label('Содержание', 'body') }}<br>
+{{  html()->textarea('body') }}<br>
