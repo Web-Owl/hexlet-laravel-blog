@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\Article;
 use App\Http\Requests\StoreArticleRequest;
-
 use Illuminate\Http\Request;
 
 class ArticleController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     */
     public function index()
     {
         $articles = Article::paginate();
@@ -16,24 +18,20 @@ class ArticleController extends Controller
         return view('article.index', compact('articles'));
     }
 
-    public function show($id)
-    {
-        $article = Article::findOrFail($id);
-        return view('article.show', compact('article'));
-    }
-
+    /**
+     * Show the form for creating a new resource.
+     */
     public function create()
     {
         $article = new Article();
         return view('article.create', compact('article'));
     }
 
+    /**
+     * Store a newly created resource in storage.
+     */
     public function store(StoreArticleRequest $request)
     {
-        // $data = $request->validate([
-        //     'name' => 'required|unique:articles',
-        //     'body' => 'required|min:1000',
-        // ]);
         $validated = $request->validated();
 
         $article = new Article();
@@ -46,19 +44,32 @@ class ArticleController extends Controller
             ->route('articles.index');
     }
 
-    public function edit($id)
+    /**
+     * Display the specified resource.
+     */
+    public function show(Article $article)
     {
-        $article = Article::findOrFail($id);
+        $article = Article::findOrFail($article->id);
+
+        return view('article.show', compact('article'));
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(Article $article)
+    {
+        $article = Article::findOrFail($article->id);
+
         return view('article.edit', compact('article'));
     }
 
-    public function update(StoreArticleRequest $request, $id)
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(StoreArticleRequest $request, Article $article)
     {
-        $article = Article::findOrFail($id);
-        // $data = $request->validate([
-        //     'name' => 'required|unique:articles,name,{$article->id}',
-        //     'body' => 'required|min:100',
-        // ]);
+        $article = Article::findOrFail($article->id);
         $validated = $request->validated();
 
         $article->fill($validated);
@@ -70,14 +81,15 @@ class ArticleController extends Controller
             ->route('articles.index');
     }
 
-    public function destroy(Request $request, $id)
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(Article $article)
     {
-        $article = Article::find($id);
+        $article = Article::find($article->id);
         if ($article) {
             $article->delete();
         }
-
-        $request->session()->flash('status', 'Статья успешно удалена');
 
         return redirect()
             ->route('articles.index');
